@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/gridFragment">
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.github.petrchatrny.puzzle8.view.HistoryFragment"
+        android:label="history_fragment"
+        tools:layout="@layout/history_fragment" />
+    <fragment
+        android:id="@+id/gridFragment"
+        android:name="com.github.petrchatrny.puzzle8.view.GridFragment"
+        android:label="grid_fragment"
+        tools:layout="@layout/grid_fragment" />
+</navigation>
