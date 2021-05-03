@@ -1,5 +1,7 @@
 package com.github.petrchatrny.puzzle8.model.entities
 
+import com.github.petrchatrny.puzzle8.model.enums.Direction
+
 class Attempt(
     val number: Int,
     val matrix: Matrix,

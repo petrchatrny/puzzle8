@@ -3,9 +3,9 @@ package com.github.petrchatrny.puzzle8.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.petrchatrny.puzzle8.model.entities.Algorithm
+import com.github.petrchatrny.puzzle8.model.enums.Algorithm
 import com.github.petrchatrny.puzzle8.model.entities.Attempt
-import com.github.petrchatrny.puzzle8.model.entities.Direction
+import com.github.petrchatrny.puzzle8.model.enums.Direction
 import com.github.petrchatrny.puzzle8.model.entities.Matrix
 import com.github.petrchatrny.puzzle8.view.GridFragmentCallback
 import kotlinx.coroutines.Dispatchers

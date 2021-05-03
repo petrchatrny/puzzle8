@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.github.petrchatrny.puzzle8.R
 import com.github.petrchatrny.puzzle8.collections.adapters.NumberAdapter
 import com.github.petrchatrny.puzzle8.databinding.GridFragmentBinding
-import com.github.petrchatrny.puzzle8.model.entities.Algorithm
+import com.github.petrchatrny.puzzle8.model.enums.Algorithm
 import com.github.petrchatrny.puzzle8.viewModel.GridViewModel
 import kotlinx.android.synthetic.main.grid_fragment.*
 

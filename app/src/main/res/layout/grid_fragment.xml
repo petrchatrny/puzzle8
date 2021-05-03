@@ -5,9 +5,9 @@
 
     <data>
 
-        <import type="com.github.petrchatrny.puzzle8.model.entities.Direction" />
+        <import type="com.github.petrchatrny.puzzle8.model.enums.Direction" />
 
-        <import type="com.github.petrchatrny.puzzle8.model.entities.Algorithm" />
+        <import type="com.github.petrchatrny.puzzle8.model.enums.Algorithm" />
 
         <variable
             name="vm"
@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/design_default_color_primary"
+            android:title="@string/puzzle"
             android:titleTextColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">

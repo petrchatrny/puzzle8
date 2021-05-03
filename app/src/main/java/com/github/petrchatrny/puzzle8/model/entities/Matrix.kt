@@ -1,5 +1,6 @@
 package com.github.petrchatrny.puzzle8.model.entities
 
+import com.github.petrchatrny.puzzle8.model.enums.Direction
 import kotlin.random.Random
 
 class Matrix {
