@@ -14,6 +14,7 @@ import com.github.petrchatrny.puzzle8.databinding.HistoryFragmentBinding
 import com.github.petrchatrny.puzzle8.model.entities.AttemptResult
 import com.github.petrchatrny.puzzle8.model.enums.Algorithm
 import com.github.petrchatrny.puzzle8.viewModel.HistoryViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.grid_fragment.toolbar
 import kotlinx.android.synthetic.main.history_fragment.*
 import java.util.*
@@ -42,6 +43,10 @@ class HistoryFragment : Fragment() {
         // default values
         setupRecyclerView()
         activity?.setActionBar(toolbar)
+
+        // remove notifications
+        val mainActivity = activity as MainActivity
+        mainActivity.mainBottomNav.removeBadge(R.id.historyFragment)
     }
 
     private fun setupRecyclerView() {

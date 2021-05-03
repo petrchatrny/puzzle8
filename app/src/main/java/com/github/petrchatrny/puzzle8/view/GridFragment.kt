@@ -15,6 +15,7 @@ import com.github.petrchatrny.puzzle8.collections.adapters.NumberAdapter
 import com.github.petrchatrny.puzzle8.databinding.GridFragmentBinding
 import com.github.petrchatrny.puzzle8.model.enums.Algorithm
 import com.github.petrchatrny.puzzle8.viewModel.GridViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.grid_fragment.*
 
 
@@ -114,6 +115,10 @@ class GridFragment : Fragment(), GridFragmentCallback {
     override fun onSolved() {
         loading.visibility = View.GONE
         solveButton.visibility = View.VISIBLE
+
+        // increase notification
+        val mainActivity = activity as MainActivity
+        mainActivity.mainBottomNav.getOrCreateBadge(R.id.historyFragment).number += 1
     }
 
     //endregion
