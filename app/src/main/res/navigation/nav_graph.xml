@@ -8,11 +8,11 @@
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.github.petrchatrny.puzzle8.view.HistoryFragment"
-        android:label="history_fragment"
+        android:label="Historie"
         tools:layout="@layout/history_fragment" />
     <fragment
         android:id="@+id/gridFragment"
         android:name="com.github.petrchatrny.puzzle8.view.GridFragment"
-        android:label="grid_fragment"
+        android:label="Puzzle"
         tools:layout="@layout/grid_fragment" />
 </navigation>
