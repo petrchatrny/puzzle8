@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Puzzle8</string>
-    <string name="grid">Mřížka</string>
+    <string name="puzzle">Puzzle</string>
     <string name="history">Historie</string>
+    <string name="result">Výsledek:</string>
+    <string name="success">Úspěch</string>
+    <string name="play">Spustit</string>
+    <string name="randomNumbers">Náhodná čísla</string>
+    <string name="algorithm">Algoritmus</string>
+    <string name="iterationCount">Počet iterací</string>
+    <string name="save">Uložit výsledek</string>
+    <string name="dfs">DFS</string>
 </resources>
