@@ -52,6 +52,7 @@ class HistoryFragment : Fragment() {
             historyRecyclerView.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = attemptAdapter
+                setHasFixedSize(true)
             }
         })
     }

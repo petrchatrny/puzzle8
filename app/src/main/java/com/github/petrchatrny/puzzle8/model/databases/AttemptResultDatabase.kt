@@ -9,7 +9,7 @@ import com.github.petrchatrny.puzzle8.model.dao.AttemptResultDao
 import com.github.petrchatrny.puzzle8.model.entities.AttemptResult
 import com.github.petrchatrny.puzzle8.utils.Converters
 
-@Database(entities = [AttemptResult::class], version = 6, exportSchema = false)
+@Database(entities = [AttemptResult::class], version = 9, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AttemptResultDatabase : RoomDatabase() {
 

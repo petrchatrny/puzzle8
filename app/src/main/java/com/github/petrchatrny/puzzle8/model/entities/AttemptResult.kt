@@ -11,7 +11,7 @@ data class AttemptResult(
     val id: Int,
     val status: Boolean,
     val totalSteps: Int,
-    val steps: List<List<Int>>,
+    val steps: List<List<Int>>?,
     val algorithm: Algorithm,
     val timestamp: Date
 )
