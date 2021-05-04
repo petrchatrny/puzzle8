@@ -4,8 +4,8 @@ import com.github.petrchatrny.puzzle8.model.enums.Direction
 import kotlin.random.Random
 
 class Matrix {
-    private var body: Array<IntArray> = arrayOf(IntArray(3), IntArray(3), IntArray(3))
-    private lateinit var pos: Pair<Int, Int>
+    var body: Array<IntArray> = arrayOf(IntArray(3), IntArray(3), IntArray(3))
+    lateinit var pos: Pair<Int, Int>
 
     init {
         val alreadyUsed = mutableListOf<Int>()

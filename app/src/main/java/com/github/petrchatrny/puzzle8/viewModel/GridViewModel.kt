@@ -23,7 +23,7 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
     var matrix = MutableLiveData(Matrix())
     var counter = MutableLiveData<Int>()
     var iterations = MutableLiveData<String>()
-    val repository: AttemptResultRepository =
+    private val repository: AttemptResultRepository =
         AttemptResultRepository(AttemptResultDatabase.getDatabase(app).attemptResultDao())
 
     fun solvePuzzle() {
@@ -72,7 +72,7 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun randomPuzzle() {
-        matrix.value = Matrix()
+        this.matrix.value = Matrix()
     }
 
     private fun bfs(start: Matrix, iterations: Int) {
@@ -134,8 +134,8 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
             attemptResult = AttemptResult(
                 id = 0,
                 status = true,
-                totalSteps = counter.value!!,
-                steps = tracerouteResult(attempt),
+                totalSteps = counter.value!! - 1,
+                steps = tracertResult(attempt),
                 algorithm = algorithm,
                 Date()
             )
@@ -143,7 +143,7 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
             attemptResult = AttemptResult(
                 id = 0,
                 status = false,
-                totalSteps = counter.value!!,
+                totalSteps = counter.value!! - 1,
                 steps = null,
                 algorithm = algorithm,
                 Date()
@@ -154,7 +154,13 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    private fun tracerouteResult(attempt: Attempt): List<List<Int>> {
-        return listOf(listOf(5, 4, 3), listOf(5, 4, 3), listOf(5, 4, 3))
+    private fun tracertResult(attempt: Attempt): List<IntArray> {
+        val path = mutableListOf<IntArray>()
+        var temp = attempt
+        while (temp.parent != null) {
+            path.add(temp.parent!!.matrix.toIntArray())
+            temp = temp.parent!!
+        }
+        return path.asReversed()
     }
 }
