@@ -37,7 +37,7 @@ class NumberAdapter(items: IntArray, listener: OnNumberClickListener?, textSize:
         holder.itemView.number.textSize = textSize.toFloat()
 
         // onClickListener
-        if (listener != null) {
+        if (this::listener.isInitialized) {
             holder.itemView.setOnClickListener {
                 listener.onNumberClick(items[position])
             }
