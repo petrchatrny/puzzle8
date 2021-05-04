@@ -12,14 +12,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.petrchatrny.puzzle8.R
 import com.github.petrchatrny.puzzle8.collections.adapters.NumberAdapter
+import com.github.petrchatrny.puzzle8.collections.onClickListeners.OnNumberClickListener
 import com.github.petrchatrny.puzzle8.databinding.GridFragmentBinding
+import com.github.petrchatrny.puzzle8.model.entities.Matrix
 import com.github.petrchatrny.puzzle8.model.enums.Algorithm
 import com.github.petrchatrny.puzzle8.viewModel.GridViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.grid_fragment.*
 
 
-class GridFragment : Fragment(), GridFragmentCallback {
+class GridFragment : Fragment(), GridFragmentCallback, OnNumberClickListener {
     private lateinit var viewModel: GridViewModel
     private lateinit var binding: GridFragmentBinding
 
@@ -40,6 +42,12 @@ class GridFragment : Fragment(), GridFragmentCallback {
         // set variables to binding
         binding.vm = viewModel
 
+        val matrix = Matrix()
+        matrix.body = arrayOf(intArrayOf(1, 2, 3), intArrayOf(4, 5, 0), intArrayOf(6, 7, 8))
+        matrix.pos = Pair(2, 1)
+
+        viewModel.matrix.value = matrix
+
         // default values
         setupRecyclerView()
         setupSpinner()
@@ -47,14 +55,16 @@ class GridFragment : Fragment(), GridFragmentCallback {
         activity?.setActionBar(toolbar)
     }
 
+    //region Setups
+
     private fun setupRecyclerView() {
         // define adapter
         viewModel.matrix.observe(viewLifecycleOwner, {
-            val numberAdapter = NumberAdapter(it.toIntArray())
+            val numberAdapter = NumberAdapter(it.toIntArray(), this)
             numberAdapter.notifyDataSetChanged()
 
             // apply adapter to recyclerView
-            rvGrid.apply {
+            gridRecyclerView.apply {
                 layoutManager = GridLayoutManager(context, 3)
                 adapter = numberAdapter
             }
@@ -93,6 +103,8 @@ class GridFragment : Fragment(), GridFragmentCallback {
         }
     }
 
+    //endregion
+
     //region Callback
 
     override fun onSolving() {
@@ -119,6 +131,14 @@ class GridFragment : Fragment(), GridFragmentCallback {
         // increase notification
         val mainActivity = activity as MainActivity
         mainActivity.mainBottomNav.getOrCreateBadge(R.id.historyFragment).number += 1
+    }
+
+    override fun onNumberClick(number: Int) {
+        viewModel.matrix.value?.apply {
+            val coords = this.getCoordsByNumber(number)
+            this.swap(coords)
+            setupRecyclerView()
+        }
     }
 
     //endregion

@@ -110,6 +110,48 @@ class Matrix {
         }
     }
 
+    fun swap(coords: Pair<Int, Int>) {
+        // down
+        if (coords.second + 1 < 3 && body[coords.second + 1][coords.first] == 0) {
+            body.apply {
+                this[coords.second + 1][coords.first] = this[coords.second][coords.first]
+                this[coords.second][coords.first] = 0
+                pos = coords
+            }
+            return
+        }
+
+        // up
+        if (coords.second - 1 > -1 && body[coords.second - 1][coords.first] == 0) {
+            body.apply {
+                this[coords.second - 1][coords.first] = this[coords.second][coords.first]
+                this[coords.second][coords.first] = 0
+                pos = coords
+            }
+            return
+        }
+
+        // right
+        if (coords.first + 1 < 3 && body[coords.second][coords.first + 1] == 0) {
+            body.apply {
+                this[coords.second][coords.first + 1] = this[coords.second][coords.first]
+                this[coords.second][coords.first] = 0
+                pos = coords
+            }
+            return
+        }
+
+        // left
+        if (coords.first - 1 > -1 && body[coords.second][coords.first - 1] == 0) {
+            body.apply {
+                this[coords.second][coords.first - 1] = this[coords.second][coords.first]
+                this[coords.second][coords.first] = 0
+                pos = coords
+            }
+            return
+        }
+    }
+
     fun isSolvable(): Boolean {
         return getInversionCount() % 2 == 0
     }
@@ -125,6 +167,20 @@ class Matrix {
         m.body = arrayOf(body[0].copyOf(), body[1].copyOf(), body[2].copyOf())
         m.pos = Pair(pos.first, pos.second)
         return m
+    }
+
+    fun getCoordsByNumber(number: Int): Pair<Int, Int> {
+        var coords = Pair(-2, -2)
+
+        for (i in 0..2) {
+            for (j in 0..2) {
+                if (body[i][j] == number) {
+                    coords = Pair(j, i)
+                    break
+                }
+            }
+        }
+        return coords
     }
 
     private fun getInversionCount(): Int {
