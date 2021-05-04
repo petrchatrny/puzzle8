@@ -8,14 +8,18 @@ import com.github.petrchatrny.puzzle8.R
 import com.github.petrchatrny.puzzle8.collections.onClickListeners.OnNumberClickListener
 import kotlinx.android.synthetic.main.item_number.view.*
 
-class NumberAdapter(items: IntArray, listener: OnNumberClickListener) :
+class NumberAdapter(items: IntArray, listener: OnNumberClickListener?, textSize: Int) :
     RecyclerView.Adapter<NumberAdapter.NumberViewHolder>() {
     private var items: IntArray = IntArray(9)
-    private var listener: OnNumberClickListener
+    private lateinit var listener: OnNumberClickListener
+    private val textSize: Int
 
     init {
         this.items = items
-        this.listener = listener
+        if (listener != null) {
+            this.listener = listener
+        }
+        this.textSize = textSize
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberViewHolder {
@@ -29,9 +33,17 @@ class NumberAdapter(items: IntArray, listener: OnNumberClickListener) :
     }
 
     override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
-        holder.itemView.setOnClickListener {
-            listener.onNumberClick(items[position])
+        // text size
+        holder.itemView.number.textSize = textSize.toFloat()
+
+        // onClickListener
+        if (listener != null) {
+            holder.itemView.setOnClickListener {
+                listener.onNumberClick(items[position])
+            }
         }
+
+        // values
         if (items[position] == 0) {
             holder.itemView.number.text = ""
             return

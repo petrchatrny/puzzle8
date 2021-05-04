@@ -42,7 +42,7 @@
 
         <!-- GRID -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/gridRecyclerView"
+            android:id="@+id/pathRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -69,7 +69,7 @@
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gridRecyclerView">
+            app:layout_constraintTop_toBottomOf="@+id/pathRecyclerView">
 
             <AutoCompleteTextView
                 android:id="@+id/dropdownAlgorithm"

@@ -60,11 +60,11 @@ class GridFragment : Fragment(), GridFragmentCallback, OnNumberClickListener {
     private fun setupRecyclerView() {
         // define adapter
         viewModel.matrix.observe(viewLifecycleOwner, {
-            val numberAdapter = NumberAdapter(it.toIntArray(), this)
+            val numberAdapter = NumberAdapter(it.toIntArray(), this, 65)
             numberAdapter.notifyDataSetChanged()
 
             // apply adapter to recyclerView
-            gridRecyclerView.apply {
+            pathRecyclerView.apply {
                 layoutManager = GridLayoutManager(context, 3)
                 adapter = numberAdapter
             }

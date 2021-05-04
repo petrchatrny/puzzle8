@@ -134,7 +134,7 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
             attemptResult = AttemptResult(
                 id = 0,
                 status = true,
-                totalSteps = counter.value!! - 1,
+                totalSteps = counter.value!!,
                 steps = tracertResult(attempt),
                 algorithm = algorithm,
                 Date()
@@ -143,7 +143,7 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
             attemptResult = AttemptResult(
                 id = 0,
                 status = false,
-                totalSteps = counter.value!! - 1,
+                totalSteps = counter.value!!,
                 steps = null,
                 algorithm = algorithm,
                 Date()
@@ -157,6 +157,7 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
     private fun tracertResult(attempt: Attempt): List<IntArray> {
         val path = mutableListOf<IntArray>()
         var temp = attempt
+        path.add(temp.matrix.toIntArray())
         while (temp.parent != null) {
             path.add(temp.parent!!.matrix.toIntArray())
             temp = temp.parent!!
