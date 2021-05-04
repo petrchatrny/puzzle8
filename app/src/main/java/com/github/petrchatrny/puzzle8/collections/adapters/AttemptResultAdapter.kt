@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.petrchatrny.puzzle8.R
+import com.github.petrchatrny.puzzle8.collections.onClickListeners.OnAttemptClickListener
 import com.github.petrchatrny.puzzle8.databinding.ItemAttemptResultBinding
 import com.github.petrchatrny.puzzle8.model.entities.AttemptResult
 
-class AttemptResultAdapter(private val items: List<AttemptResult>) :
-    RecyclerView.Adapter<AttemptResultAdapter.AttemptResultViewHolder>() {
+class AttemptResultAdapter(
+    private val items: List<AttemptResult>,
+    private val listener: OnAttemptClickListener
+) : RecyclerView.Adapter<AttemptResultAdapter.AttemptResultViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AttemptResultViewHolder {
         val binding = DataBindingUtil.inflate<ItemAttemptResultBinding>(
@@ -23,6 +26,9 @@ class AttemptResultAdapter(private val items: List<AttemptResult>) :
 
     override fun onBindViewHolder(holder: AttemptResultViewHolder, position: Int) {
         holder.binding.attempt = items[position]
+        holder.binding.root.setOnClickListener {
+            listener.onAttemptClick(items[position])
+        }
     }
 
     override fun getItemCount(): Int {

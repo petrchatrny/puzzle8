@@ -2,7 +2,7 @@
     <string name="app_name">Puzzle8</string>
     <string name="puzzle">Puzzle</string>
     <string name="history">Historie</string>
-    <string name="result">Výsledek:</string>
+    <string name="result">Výsledek</string>
     <string name="success">Úspěch</string>
     <string name="play">Spustit</string>
     <string name="randomNumbers">Náhodná čísla</string>
@@ -10,4 +10,10 @@
     <string name="iterationCount">Počet iterací</string>
     <string name="save">Uložit výsledek</string>
     <string name="dfs">DFS</string>
+    <string name="usedAlgorithm">Použitý algoritmus</string>
+    <string name="date">Datum</string>
+    <string name="totalStepsCount">Počet pokusů celkem</string>
+    <string name="rightStepsCount">Počet kroků ke správnému řešení</string>
+    <string name="steps">Jednotlivé kroky</string>
+    <string name="metaData">Meta data</string>
 </resources>
