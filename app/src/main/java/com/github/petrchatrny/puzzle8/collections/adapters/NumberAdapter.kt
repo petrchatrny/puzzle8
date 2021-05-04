@@ -1,12 +1,12 @@
 package com.github.petrchatrny.puzzle8.collections.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.petrchatrny.puzzle8.R
 import com.github.petrchatrny.puzzle8.collections.onClickListeners.OnNumberClickListener
-import kotlinx.android.synthetic.main.item_number.view.*
+import com.github.petrchatrny.puzzle8.databinding.ItemNumberBinding
 
 class NumberAdapter(items: IntArray, listener: OnNumberClickListener?, textSize: Int) :
     RecyclerView.Adapter<NumberAdapter.NumberViewHolder>() {
@@ -24,7 +24,8 @@ class NumberAdapter(items: IntArray, listener: OnNumberClickListener?, textSize:
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberViewHolder {
         return NumberViewHolder(
-            LayoutInflater.from(parent.context).inflate(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
                 R.layout.item_number,
                 parent,
                 false
@@ -34,29 +35,27 @@ class NumberAdapter(items: IntArray, listener: OnNumberClickListener?, textSize:
 
     override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
         // text size
-        holder.itemView.number.textSize = textSize.toFloat()
+        holder.binding.number.textSize = textSize.toFloat()
 
         // onClickListener
         if (this::listener.isInitialized) {
-            holder.itemView.setOnClickListener {
+            holder.binding.numberLayout.setOnClickListener {
                 listener.onNumberClick(items[position])
             }
         }
 
         // values
         if (items[position] == 0) {
-            holder.itemView.number.text = ""
+            holder.binding.number.text = ""
             return
         }
-        holder.itemView.number.text = items[position].toString()
+        holder.binding.number.text = items[position].toString()
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
 
-    class NumberViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class NumberViewHolder(val binding: ItemNumberBinding) : RecyclerView.ViewHolder(binding.root)
 
 }

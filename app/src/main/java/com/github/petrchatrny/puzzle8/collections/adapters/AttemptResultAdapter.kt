@@ -15,13 +15,14 @@ class AttemptResultAdapter(
 ) : RecyclerView.Adapter<AttemptResultAdapter.AttemptResultViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AttemptResultViewHolder {
-        val binding = DataBindingUtil.inflate<ItemAttemptResultBinding>(
-            LayoutInflater.from(parent.context),
-            R.layout.item_attempt_result,
-            parent,
-            false
+        return AttemptResultViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.item_attempt_result,
+                parent,
+                false
+            )
         )
-        return AttemptResultViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: AttemptResultViewHolder, position: Int) {
@@ -37,7 +38,6 @@ class AttemptResultAdapter(
 
 
     class AttemptResultViewHolder(val binding: ItemAttemptResultBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-    }
+        RecyclerView.ViewHolder(binding.root)
 
 }

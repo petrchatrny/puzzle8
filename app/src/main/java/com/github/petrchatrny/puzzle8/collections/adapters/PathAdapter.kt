@@ -13,13 +13,14 @@ class PathAdapter(
 ) : RecyclerView.Adapter<PathAdapter.PathViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PathViewHolder {
-        val binding = DataBindingUtil.inflate<ItemPathNodeBinding>(
-            LayoutInflater.from(parent.context),
-            R.layout.item_path_node,
-            parent,
-            false
+        return PathViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.item_path_node,
+                parent,
+                false
+            )
         )
-        return PathViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PathViewHolder, position: Int) {
@@ -36,6 +37,5 @@ class PathAdapter(
         return items.size
     }
 
-    class PathViewHolder(val binding: ItemPathNodeBinding) : RecyclerView.ViewHolder(binding.root) {
-    }
+    class PathViewHolder(val binding: ItemPathNodeBinding) : RecyclerView.ViewHolder(binding.root)
 }

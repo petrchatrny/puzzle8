@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.github.petrchatrny.puzzle8.R
 import com.github.petrchatrny.puzzle8.collections.adapters.PathAdapter
 import com.github.petrchatrny.puzzle8.databinding.AttemptResultFragmentBinding
-import kotlinx.android.synthetic.main.attempt_result_fragment.*
-import kotlinx.android.synthetic.main.grid_fragment.toolbar
 
 class AttemptResultFragment : Fragment() {
     private val args: AttemptResultFragmentArgs by navArgs()
@@ -32,14 +30,14 @@ class AttemptResultFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        activity?.setActionBar(toolbar)
+        activity?.setActionBar(binding.toolbar)
         if (args.attemptResult.status) {
             setupRecyclerView()
         }
     }
 
     private fun setupRecyclerView() {
-        pathRecyclerView.apply {
+        binding.pathRecyclerView.apply {
             adapter = PathAdapter(args.attemptResult.steps!!)
             layoutManager = GridLayoutManager(context, 3)
             setHasFixedSize(true)

@@ -15,9 +15,6 @@ import com.github.petrchatrny.puzzle8.collections.onClickListeners.OnAttemptClic
 import com.github.petrchatrny.puzzle8.databinding.HistoryFragmentBinding
 import com.github.petrchatrny.puzzle8.model.entities.AttemptResult
 import com.github.petrchatrny.puzzle8.viewModel.HistoryViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.grid_fragment.toolbar
-import kotlinx.android.synthetic.main.history_fragment.*
 
 class HistoryFragment : Fragment(), OnAttemptClickListener {
     private lateinit var viewModel: HistoryViewModel
@@ -41,11 +38,11 @@ class HistoryFragment : Fragment(), OnAttemptClickListener {
 
         // default values
         setupRecyclerView()
-        activity?.setActionBar(toolbar)
+        activity?.setActionBar(binding.toolbar)
 
         // remove notifications
         val mainActivity = activity as MainActivity
-        mainActivity.mainBottomNav.removeBadge(R.id.historyFragment)
+        mainActivity.binding.mainBottomNav.removeBadge(R.id.historyFragment)
     }
 
     private fun setupRecyclerView() {
@@ -53,7 +50,7 @@ class HistoryFragment : Fragment(), OnAttemptClickListener {
             val attemptAdapter = AttemptResultAdapter(it, this)
             attemptAdapter.notifyDataSetChanged()
 
-            historyRecyclerView.apply {
+            binding.historyRecyclerView.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = attemptAdapter
                 setHasFixedSize(true)

@@ -1,7 +1,6 @@
 package com.github.petrchatrny.puzzle8.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +13,8 @@ import com.github.petrchatrny.puzzle8.R
 import com.github.petrchatrny.puzzle8.collections.adapters.NumberAdapter
 import com.github.petrchatrny.puzzle8.collections.onClickListeners.OnNumberClickListener
 import com.github.petrchatrny.puzzle8.databinding.GridFragmentBinding
-import com.github.petrchatrny.puzzle8.model.entities.Matrix
 import com.github.petrchatrny.puzzle8.model.enums.Algorithm
 import com.github.petrchatrny.puzzle8.viewModel.GridViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.grid_fragment.*
 
 
 class GridFragment : Fragment(), GridFragmentCallback, OnNumberClickListener {
@@ -42,17 +38,11 @@ class GridFragment : Fragment(), GridFragmentCallback, OnNumberClickListener {
         // set variables to binding
         binding.vm = viewModel
 
-        val matrix = Matrix()
-        matrix.body = arrayOf(intArrayOf(1, 2, 3), intArrayOf(4, 5, 0), intArrayOf(6, 7, 8))
-        matrix.pos = Pair(2, 1)
-
-        viewModel.matrix.value = matrix
-
         // default values
         setupRecyclerView()
         setupSpinner()
         setupProgressBar()
-        activity?.setActionBar(toolbar)
+        activity?.setActionBar(binding.toolbar)
     }
 
     //region Setups
@@ -64,13 +54,10 @@ class GridFragment : Fragment(), GridFragmentCallback, OnNumberClickListener {
             numberAdapter.notifyDataSetChanged()
 
             // apply adapter to recyclerView
-            pathRecyclerView.apply {
+            binding.pathRecyclerView.apply {
                 layoutManager = GridLayoutManager(context, 3)
                 adapter = numberAdapter
             }
-
-            // check solvable
-            Log.println(Log.ASSERT, "SOLVEABLE", it.isSolvable().toString())
         })
     }
 
@@ -80,8 +67,8 @@ class GridFragment : Fragment(), GridFragmentCallback, OnNumberClickListener {
             R.layout.support_simple_spinner_dropdown_item,
             Algorithm.values()
         )
-        dropdownAlgorithm.setAdapter(spinnerAdapter)
-        dropdownAlgorithm.setOnItemClickListener { _, _, position, _ ->
+        binding.dropdownAlgorithm.setAdapter(spinnerAdapter)
+        binding.dropdownAlgorithm.setOnItemClickListener { _, _, position, _ ->
             run {
                 viewModel.algorithm = spinnerAdapter.getItem(position)!!
             }
@@ -89,7 +76,7 @@ class GridFragment : Fragment(), GridFragmentCallback, OnNumberClickListener {
     }
 
     private fun setupProgressBar() {
-        loading.apply {
+        binding.loading.apply {
             viewModel.iterations.observe(viewLifecycleOwner, {
                 max = if (it == null || it == "") {
                     0
@@ -109,28 +96,28 @@ class GridFragment : Fragment(), GridFragmentCallback, OnNumberClickListener {
 
     override fun onSolving() {
         // nullify errors
-        dropdownAlgorithmLayout.error = null
-        iterationsLayout.error = null
+        binding.dropdownAlgorithmLayout.error = null
+        binding.iterationsLayout.error = null
 
-        loading.visibility = View.VISIBLE
-        solveButton.visibility = View.GONE
+        binding.loading.visibility = View.VISIBLE
+        binding.solveButton.visibility = View.GONE
     }
 
     override fun onAlgorithmError() {
-        dropdownAlgorithmLayout.error = " "
+        binding.dropdownAlgorithmLayout.error = " "
     }
 
     override fun onIterationsError() {
-        iterationsLayout.error = " "
+        binding.iterationsLayout.error = " "
     }
 
     override fun onSolved() {
-        loading.visibility = View.GONE
-        solveButton.visibility = View.VISIBLE
+        binding.loading.visibility = View.GONE
+        binding.solveButton.visibility = View.VISIBLE
 
         // increase notification
         val mainActivity = activity as MainActivity
-        mainActivity.mainBottomNav.getOrCreateBadge(R.id.historyFragment).number += 1
+        mainActivity.binding.mainBottomNav.getOrCreateBadge(R.id.historyFragment).number += 1
     }
 
     override fun onNumberClick(number: Int) {

@@ -2,18 +2,21 @@ package com.github.petrchatrny.puzzle8.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.github.petrchatrny.puzzle8.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.github.petrchatrny.puzzle8.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         // setup navigation
-        mainBottomNav.setupWithNavController(navHostFragment.findNavController())
+        binding.mainBottomNav.setupWithNavController(findNavController(R.id.navHostFragment))
     }
 }
