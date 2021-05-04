@@ -156,12 +156,6 @@ class Matrix {
         return getInversionCount() % 2 == 0
     }
 
-    fun isSolved(): Boolean {
-        return body[0] contentEquals intArrayOf(1, 2, 3) &&
-                body[1] contentEquals intArrayOf(4, 5, 6) &&
-                body[2] contentEquals intArrayOf(7, 8, 0)
-    }
-
     fun copy(): Matrix {
         val m = Matrix()
         m.body = arrayOf(body[0].copyOf(), body[1].copyOf(), body[2].copyOf())

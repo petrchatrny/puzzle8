@@ -34,6 +34,7 @@ class GridFragment : Fragment(), GridFragmentCallback, OnNumberClickListener {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(GridViewModel::class.java)
         viewModel.callback = this
+        viewModel.randomPuzzle()
 
         // set variables to binding
         binding.vm = viewModel

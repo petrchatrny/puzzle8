@@ -8,23 +8,30 @@ import com.github.petrchatrny.puzzle8.model.databases.AttemptResultDatabase
 import com.github.petrchatrny.puzzle8.model.entities.Attempt
 import com.github.petrchatrny.puzzle8.model.entities.AttemptResult
 import com.github.petrchatrny.puzzle8.model.entities.Matrix
+import com.github.petrchatrny.puzzle8.model.entities.Settings
 import com.github.petrchatrny.puzzle8.model.enums.Algorithm
 import com.github.petrchatrny.puzzle8.model.enums.Direction
 import com.github.petrchatrny.puzzle8.model.repositories.AttemptResultRepository
+import com.github.petrchatrny.puzzle8.model.repositories.SettingsRepository
 import com.github.petrchatrny.puzzle8.view.GridFragmentCallback
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.util.*
 
 class GridViewModel(app: Application) : AndroidViewModel(app) {
+    private val attemptResultRepository = AttemptResultRepository(
+        AttemptResultDatabase.getDatabase(app).attemptResultDao()
+    )
+    private val settingsRepository = SettingsRepository(app)
     lateinit var callback: GridFragmentCallback
+
     lateinit var algorithm: Algorithm
-    var matrix = MutableLiveData(Matrix())
+    var matrix = MutableLiveData<Matrix>()
     var counter = MutableLiveData<Int>()
     var iterations = MutableLiveData<String>()
-    private val repository: AttemptResultRepository =
-        AttemptResultRepository(AttemptResultDatabase.getDatabase(app).attemptResultDao())
 
     fun solvePuzzle() {
         var error = false
@@ -72,7 +79,14 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun randomPuzzle() {
-        this.matrix.value = Matrix()
+        matrix.postValue(Matrix())
+        /*viewModelScope.launch {
+            var mMatrix = Matrix()
+            while (!mMatrix.isSolvable()) {
+                mMatrix = Matrix()
+            }
+            matrix.postValue(mMatrix)
+        }*/
     }
 
     private fun bfs(start: Matrix, iterations: Int) {
@@ -86,7 +100,7 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
             matrix.postValue(current.matrix)
             explored.add(current)
 
-            if (current.matrix.isSolved()) {
+            if (isMatrixSolved(current.matrix)) {
                 saveResult(current, Algorithm.BFS)
                 return
             }
@@ -112,7 +126,7 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
             matrix.postValue(current.matrix)
             explored.add(current)
 
-            if (current.matrix.isSolved()) {
+            if (isMatrixSolved(current.matrix)) {
                 saveResult(current, Algorithm.DFS)
                 return
             }
@@ -150,7 +164,7 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
             )
         }
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertAttemptResult(attemptResult)
+            attemptResultRepository.insertAttemptResult(attemptResult)
         }
     }
 
@@ -163,5 +177,19 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
             temp = temp.parent!!
         }
         return path.asReversed()
+    }
+
+    private fun isMatrixSolved(matrix: Matrix): Boolean {
+        var string = ""
+        matrix.toIntArray().map {
+            string += it.toString()
+        }
+
+        val flowResult: Settings
+        runBlocking {
+            flowResult = settingsRepository.getSettings().first()
+        }
+
+        return string == flowResult.goal
     }
 }

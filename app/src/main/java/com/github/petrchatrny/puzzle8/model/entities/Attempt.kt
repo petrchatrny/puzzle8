@@ -5,7 +5,7 @@ import com.github.petrchatrny.puzzle8.model.enums.Direction
 class Attempt(
     val number: Int,
     val matrix: Matrix,
-    val lastMove: Direction,
+    private val lastMove: Direction,
     val parent: Attempt?
 ) {
     fun getNeighbours(): List<Attempt> {
@@ -40,6 +40,14 @@ class Attempt(
             return matrix.toIntArray() contentEquals other.matrix.toIntArray()
         }
         return false
+    }
+
+    override fun hashCode(): Int {
+        var result = number
+        result = 31 * result + matrix.hashCode()
+        result = 31 * result + lastMove.hashCode()
+        result = 31 * result + (parent?.hashCode() ?: 0)
+        return result
     }
 }
 

@@ -20,5 +20,14 @@
     <string name="totalStepsCount">Počet pokusů celkem</string>
     <string name="rightStepsCount">Počet kroků ke správnému řešení</string>
     <string name="steps">Jednotlivé kroky</string>
-    <string name="metaData">Meta data</string>
+
+    <!-- SETTINGS FRAGMENT -->
+    <string name="layoutType">Rozložení</string>
+    <string name="goal">Cílový stav</string>
+    <string name="save">Uložit</string>
+    <string name="resultIs">Zádání je:</string>
+    <string-array name="layout">
+        <item>3x3</item>
+    </string-array>
+
 </resources>

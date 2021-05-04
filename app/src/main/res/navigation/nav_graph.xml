@@ -28,4 +28,9 @@
             android:name="attemptResult"
             app:argType="com.github.petrchatrny.puzzle8.model.entities.AttemptResult" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.github.petrchatrny.puzzle8.view.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
 </navigation>

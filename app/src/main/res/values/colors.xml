@@ -10,4 +10,7 @@
 
     <color name="fail_red">#FF4F4F</color>
     <color name="success_green">#7DE47A</color>
+
+    <color name="fail_red_dark">#B00020</color>
+    <color name="success_green_dark">#48AD79</color>
 </resources>
