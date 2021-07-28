@@ -79,14 +79,13 @@ class GridViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun randomPuzzle() {
-        matrix.postValue(Matrix())
-        /*viewModelScope.launch {
+        viewModelScope.launch {
             var mMatrix = Matrix()
             while (!mMatrix.isSolvable()) {
                 mMatrix = Matrix()
             }
             matrix.postValue(mMatrix)
-        }*/
+        }
     }
 
     private fun bfs(start: Matrix, iterations: Int) {

@@ -13,6 +13,7 @@ import com.github.petrchatrny.puzzle8.R
 import com.github.petrchatrny.puzzle8.collections.adapters.NumberAdapter
 import com.github.petrchatrny.puzzle8.collections.onClickListeners.OnNumberClickListener
 import com.github.petrchatrny.puzzle8.databinding.GridFragmentBinding
+import com.github.petrchatrny.puzzle8.model.entities.Matrix
 import com.github.petrchatrny.puzzle8.model.enums.Algorithm
 import com.github.petrchatrny.puzzle8.viewModel.GridViewModel
 
@@ -34,10 +35,16 @@ class GridFragment : Fragment(), GridFragmentCallback, OnNumberClickListener {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(GridViewModel::class.java)
         viewModel.callback = this
-        viewModel.randomPuzzle()
+        //viewModel.randomPuzzle()
 
         // set variables to binding
         binding.vm = viewModel
+
+        val matrix = Matrix()
+        matrix.body = arrayOf(intArrayOf(1, 2, 3), intArrayOf(4, 5, 0), intArrayOf(6, 7, 8))
+        matrix.pos = Pair(2, 1)
+
+        viewModel.matrix.value = matrix
 
         // default values
         setupRecyclerView()
